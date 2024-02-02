@@ -1,11 +1,18 @@
 import authService from "../services/authService.js";
 
-function signup(req, res){
+async function signup(req, res){
     const body = req.body;
 
-    const resService = authService.signup(body);
+    try {
+        const resService = await authService.signup(body);
+        res.status(201).send(resService);
+    } catch (error) {
+        res.status(409).send(error.message)
+    }
 
-    res.send(resService);
+    
+
+    
 }
 
 export default{

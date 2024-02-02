@@ -1,9 +1,15 @@
 import express from 'express';
-import authRouter from "./routes/authRoutes.js"
+import authRouter from "./routes/authRoutes.js";
+import { connectDb } from './config/database.js';
+
+connectDb();
 
 const app = express();
-app.use(json());
+
+app.use(express.json());
 app.use(authRouter);
 
-app.listen(5000, ()=> console.log("Server is running in port 5000"));
+const port = process.env.PORT;
+
+app.listen(port, ()=> console.log(`Server is running in port ${port}`));
 
